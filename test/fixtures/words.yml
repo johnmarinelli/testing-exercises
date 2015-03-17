@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  eng: MyString
+  spa: MyString
+
+two:
+  eng: MyString
+  spa: MyString
+
+three:
+  eng: Hello
+  spa: Hola
