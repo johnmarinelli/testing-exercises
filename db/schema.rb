@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150320020927) do
+ActiveRecord::Schema.define(version: 20150322223219) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "title"
@@ -19,6 +19,18 @@ ActiveRecord::Schema.define(version: 20150320020927) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "queries", force: :cascade do |t|
+    t.integer  "hour"
+    t.string   "category"
+    t.string   "location_country"
+    t.integer  "price_max"
+    t.integer  "user_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "queries", ["user_id"], name: "index_queries_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

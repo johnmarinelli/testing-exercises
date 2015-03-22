@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  hour: 1
+  category: APET
+  location_country: USA
+  price_max: 100
+  user_id: 8
+
+two:
+  hour: 12
+  category: JBIZ
+  location_country: USA
+  price_max: 999999
+  user_id: 8

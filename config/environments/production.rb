@@ -80,16 +80,17 @@ Rails.application.configure do
   config.action_mailer_delivery_method = :smtp
 
   config.action_mailer.smtp_settings = {
-#    :address => "smtp.gmail.com",
-    :address => "smtp.mailgun.org",
+    :address => "smtp.gmail.com",
+#    :address => "smtp.mailgun.org",
     :port => 587,
-#    :user_name => ENV["mailer_email"],
-#    :password => ENV["mailer_email_pwd"],
+    :user_name => ENV["mailer_email"],
+    :password => ENV["mailer_email_pwd"],
     :authentication => "plain",
+    :enable_starttlx_auto => true
 #    :enable_starttls_auto => true
-    :domain => ENV["mailgun_domain"],
-    :user_name => ENV["mailgun_username"],
-    :password => ENV["mailgun_pwd"]
+#    :domain => ENV["mailgun_domain"],
+#    :user_name => ENV["mailgun_username"],
+#    :password => ENV["mailgun_pwd"]
   }
 
 end
