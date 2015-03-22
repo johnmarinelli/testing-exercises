@@ -29,3 +29,6 @@ bower.json
 .powenv
 # 3taps api key
 app/services/api_key.rb
+
+# Ignore application configuration
+/config/application.yml
