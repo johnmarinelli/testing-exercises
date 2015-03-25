@@ -1,6 +1,6 @@
 # app/services/ThreeTapsAPI.rb
-require 'open-uri'
-require_relative 'api_key'
+require 'api_key'
+require('open-uri')
 
 # helper function to append get vars to the 3taps endpoint
 def append_get_vars(url, args)
@@ -9,7 +9,11 @@ def append_get_vars(url, args)
   end
 
   args.each do |k, v|
-    url << '&' << k.to_s << '=' << v.to_s
+    # TODO
+    # find way to recursively dive into a hash and build a url
+    if not k.instance_of? Hash
+      url << '&' << k.to_s << '=' << v.to_s
+    end
   end
 
   url
@@ -31,13 +35,13 @@ module Search
         :category => nil,
         :category_group => nil,
 
-        :location => {
-          :zipcode => nil,
-          :city => nil,
-          :state => nil,
-          :country => nil,
-          :everywhere => false
-        },
+#        :location => {
+#          :zipcode => nil,
+#          :city => nil,
+#          :state => nil,
+#          :country => nil,
+#          :everywhere => false
+#        },
 
         :price_min => nil,
         :price_max => nil,
@@ -50,6 +54,10 @@ module Search
     def status
       open(@endpoint).status
     end
+
+    def set_params(params)
+      @parameters.merge! params
+    end
   end
 
   # handles search endpoint for 3taps api
@@ -58,6 +66,11 @@ module Search
       super
       @endpoint = "http://search.3taps.com?"
       @search_url = append_get_vars(@endpoint.clone, {'auth_token' => @auth_token})
+    end
+
+    def search
+      @endpoint = append_get_vars @search_url.clone, @parameters
+      open(@endpoint).read
     end
   end
 end

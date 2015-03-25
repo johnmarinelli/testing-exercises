@@ -5,3 +5,6 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+query1 = Query.create(hour: 19, category: "JBIZ", location_country: "USA", price_max: 100, user_id: 8)
+query1 = Query.create(hour: 19, category: "APET", location_country: "USA", price_max: 200, user_id: 8)
