@@ -1,4 +1,4 @@
-require 'three_taps'
+require 'api'
 
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
 
   def do_scheduled_query
     queries = self.queries
-    tts = Search::ThreeTapsSearch.new
+    tts = Search::Search.new
 
     queries.each do |q|
       tts.set_params({

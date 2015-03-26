@@ -21,9 +21,9 @@
 
 # every hour o fevery day every week
 every '0 * * * *' do 
-  runner "SignupMailer.signup_mail(User.first).deliver", :environment => "production"
+#  runner "SignupMailer.signup_mail(User.first).deliver", :environment => "production"
 end
 
 every '* * * * *' do
-  runner "QueryRunner.send_emails", :environment => "production"
+#  runner "QueryRunner.send_emails", :environment => "production"
 end

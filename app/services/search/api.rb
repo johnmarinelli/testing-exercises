@@ -2,7 +2,7 @@
 require 'api_key'
 require('open-uri')
 
-# helper function to append get vars to the 3taps endpoint
+# helper function to append get vars to the endpoint
 def append_get_vars(url, args)
   if url[-1, 1] != '?' then
     url[-1, 1] << '?'
@@ -21,7 +21,7 @@ end
 
 module Search
   # base class that will hold common search parameters, auth token
-  class ThreeTapsAPI
+  class API
     attr_reader :search_url
     attr_reader :endpoint
     attr_reader :auth_token
@@ -60,8 +60,8 @@ module Search
     end
   end
 
-  # handles search endpoint for 3taps api
-  class ThreeTapsSearch < ThreeTapsAPI
+  # handles search endpoint for api
+  class Search < API
     def initialize
       super
       @endpoint = "http://search.3taps.com?"
