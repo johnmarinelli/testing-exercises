@@ -22,13 +22,13 @@ end
 module Search
   # base class that will hold common search parameters, auth token
   class API
-    attr_reader :search_url
+    attr_reader :api_url
     attr_reader :endpoint
     attr_reader :auth_token
 
     attr_reader :parameters
 
-    def initialize
+    def initialize(sub)
       @auth_token = Search::Api_key
 
       @parameters = {
@@ -49,10 +49,13 @@ module Search
         :begin_date => nil,
         :end_date => nil
       }
+
+      @api_url = "http://" + sub + ".3taps.com?"
+      append_get_vars @api_url, {'auth_token' => @auth_token}
     end
 
     def status
-      open(@endpoint).status
+      open(@api_url).status
     end
 
     def set_params(params)
@@ -61,16 +64,33 @@ module Search
   end
 
   # handles search endpoint for api
-  class Search < API
+  class APISearch < API
     def initialize
-      super
-      @endpoint = "http://search.3taps.com?"
-      @search_url = append_get_vars(@endpoint.clone, {'auth_token' => @auth_token})
+      super('search')
     end
 
     def search
-      @endpoint = append_get_vars @search_url.clone, @parameters
+      @endpoint = append_get_vars @api_url.clone, @parameters
       open(@endpoint).read
+    end
+  end
+
+  # handles poll endpoint for api
+  class APIPoll < API
+    def initialize(anchor=nil)
+      super('polling')
+
+      if nil != anchor
+        append_get_vars @api_url, { :anchor => anchor }
+      end
+
+      # add /poll to end of url
+      idx = @api_url.index('.com')
+      @api_url.insert(idx+4, '/poll')
+    end
+
+    def set_anchor(anchor)
+      @parameters[:anchor] = anchor
     end
   end
 end
